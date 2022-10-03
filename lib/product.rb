@@ -12,4 +12,15 @@ class Product
   def format_description
     @description
   end
+
+  def price_with_tax
+   return ("%.2f" %(@total_price + calculate_tax)).to_f
+  end
+
+  def calculate_tax
+   raw_tax = @tax.calculate_tax(@total_price)
+   ("%.2f" %(((raw_tax/ROUNDING_TO).ceil) * ROUNDING_TO)).to_f
+  end
+
+  attr_reader :quantity
 end
